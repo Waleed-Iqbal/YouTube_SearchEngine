@@ -1,0 +1,8 @@
+
+*.dll
+*.xml
+*.cache
+*.cs
+*.config
+*.csproj
+*.user
