@@ -6,3 +6,9 @@
 *.config
 *.csproj
 *.user
+*.exe
+*.rsp
+*.targets
+*.pdb
+*.CopyComplete
+*.txt
