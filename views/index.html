@@ -2,9 +2,38 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>YT Search Vids</title>
+    <link href="../styles/variables.css" rel="stylesheet" />
+    <link href="../styles/styles.css" rel="stylesheet" />
 </head>
 <body>
 
+
+    <div id="container">
+        <header>
+            <h1>Search<span>Videos</span></h1>
+            <p>Search all YouTube videos</p>
+        </header>
+        <section>
+            <form id="search-form" name="search-form" onsubmit="return searchYouTube()">
+                <div class="fieldcontainer">
+                    <input type="search" id="query" class="search-field" placeholder="Search YouTube" />
+                    <input type="submit" name="search-button" id="search-btn" value="" />
+                </div>
+            </form>
+
+            <ul id="results"></ul>
+            <div id="buttons"> </div>
+        </section>
+        <footer>
+            <p>Copyright &copy; 2018, All Rights Reserved</p>
+        </footer>
+    </div>
+
+
+
+
+    <script src="../scripts/jquery-3.2.1.min.js"></script>
+    <script src="../scripts/main.js"></script>
 </body>
 </html>
