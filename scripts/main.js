@@ -69,6 +69,78 @@ function searchYouTube() {
         });
 }
 
+
+function nextPage() {
+
+    var token = $("#next-button").data("token");
+    q = $("#next-button").data("query");
+
+    $("#results").html("");
+    $("#buttons").html("");
+
+    //Get form input
+    q = $("#query").val();
+
+    $.get(
+        "https://www.googleapis.com/youtube/v3/search", {
+            part: "snippet, id",
+            q: q,
+            pageToken: token,
+            type: "video",
+            key: "AIzaSyCkVzJuXpfwuWlPj8gk8BnmszFAiNqJad8"
+        },
+        function (response) {
+            var nextPageToken = response.nextPageToken;
+            var prevPageToken = response.prevPageToken;
+            console.log(response);
+
+            $.each(response.items, function (index, item) {
+                var output = getOutput(item);
+                $("#results").append(output);
+            });
+
+            var buttons = getButtons(nextPageToken, prevPageToken);
+            $("#buttons").append(buttons);
+        });
+}
+
+function prevPage() {
+
+    var token = $("#prev-button").data("token");
+    q = $("#prev-button").data("query");
+
+    $("#results").html("");
+    $("#buttons").html("");
+
+    //Get form input
+    q = $("#query").val();
+
+    $.get(
+        "https://www.googleapis.com/youtube/v3/search", {
+            part: "snippet, id",
+            q: q,
+            pageToken: token,
+            type: "video",
+            key: "AIzaSyCkVzJuXpfwuWlPj8gk8BnmszFAiNqJad8"
+        },
+        function (response) {
+            var nextPageToken = response.nextPageToken;
+            var prevPageToken = response.prevPageToken;
+            console.log(response);
+
+            $.each(response.items, function (index, item) {
+                var output = getOutput(item);
+                $("#results").append(output);
+            });
+
+            var buttons = getButtons(nextPageToken, prevPageToken);
+            $("#buttons").append(buttons);
+        });
+}
+
+
+
+
 function getOutput(item) {
     var videoId = item.id.videoId;
     var title = item.snippet.title;
@@ -102,14 +174,14 @@ function getButtons(nextPageToken, prevPageToken) {
     if (!prevPageToken) {
         btnOutput = "<div class='button-container'>" +
             "<button id='next-button' class='paging-button' data-token='" + nextPageToken + "' data-query='" + q + "' " +
-            "onclick='nextpage()' >Next Page</button>" +
+            "onclick='nextPage()'>Next Page</button>" +
             "</div>";
     } else {
         btnOutput = "<div class='button-container'>" +
-            "< button id= 'prev-button' class='paging-button' data- token='" + prevPageToken + "' data-query='" + q + "' " +
-            "onclick='prevpage()' >Previous Page</button>" +
+            "<button id='prev-button' class='paging-button' data-token='" + prevPageToken + "' data-query='" + q + "' " +
+            "onclick='prevPage()'>Previous Page</button>" +
             "<button id='next-button' class='paging-button' data-token='" + nextPageToken + "' data-query='" + q + "' " +
-            "onclick='nextpage()' >Next Page</button>" +
+            "onclick='nextPage()'>Next Page</button>" +
             "</div>";
     }
 
