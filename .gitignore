@@ -12,3 +12,14 @@
 *.pdb
 *.CopyComplete
 *.txt
+.vs/YouTube_SearchEngine/v15/.suo
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
+*.props
+*.xdt
+*.nupkg
+*.ps1
+*.rtf
+*.sln
