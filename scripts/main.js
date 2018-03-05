@@ -8,6 +8,9 @@
 var q = "";
 
 $(function () {
+
+    $(".fancybox").fancybox();
+
     var searchField = $("#query");
     var icon = $("#search-btn");
 
@@ -139,8 +142,6 @@ function prevPage() {
 }
 
 
-
-
 function getOutput(item) {
     var videoId = item.id.videoId;
     var title = item.snippet.title;
@@ -154,7 +155,7 @@ function getOutput(item) {
         "   <img src='" + thumb + "'>" +
         "</div>" +
         "<div class='list-right'>" +
-        "   <h3>" + title + "</h3>" +
+        "   <h3><a data-fancybox='gallery' href='https://www.youtube.com/embed/"+videoId+"'>" + title + "</a></h3>" +
         "   <small>By <span class='cTitle'>" + channelTitle + "</span> on " + date + "</small>" +
         "   <p>" + description + "</p>" +
         "</div>" +
