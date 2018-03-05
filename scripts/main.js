@@ -5,7 +5,7 @@
 // Project id ... youtube-searchengine-197007
 // Key ... AIzaSyCkVzJuXpfwuWlPj8gk8BnmszFAiNqJad8
 
-
+var q = "";
 
 $(function () {
     var searchField = $("#query");
@@ -45,7 +45,7 @@ function searchYouTube() {
     $("#buttons").html("");
 
     //Get form input
-    var q = $("#query").val();
+    q = $("#query").val();
 
     $.get(
         "https://www.googleapis.com/youtube/v3/search", {
@@ -63,6 +63,9 @@ function searchYouTube() {
                 var output = getOutput(item);
                 $("#results").append(output);
             });
+
+            var buttons = getButtons(nextPageToken, prevPageToken);
+            $("#buttons").append(buttons);
         });
 }
 
@@ -79,17 +82,36 @@ function getOutput(item) {
         "   <img src='" + thumb + "'>" +
         "</div>" +
         "<div class='list-right'>" +
-        "<h3>" + title + "</h3>" +
-        "<small>By <span class='cTitle'>" + channelTitle + "</span> on " + date + "</small>" +
-        "" +
-        "" +
-        "" +
-        "</div>"
-    "</li>";
+        "   <h3>" + title + "</h3>" +
+        "   <small>By <span class='cTitle'>" + channelTitle + "</span> on " + date + "</small>" +
+        "   <p>" + description + "</p>" +
+        "</div>" +
+        "</div>" +
+        "</li>" +
+        "<div class='clearFix'></div>";
 
 
 
     return output;
 
 
+}
+
+function getButtons(nextPageToken, prevPageToken) {
+    var btnOutput = "";
+    if (!prevPageToken) {
+        btnOutput = "<div class='button-container'>" +
+            "<button id='next-button' class='paging-button' data-token='" + nextPageToken + "' data-query='" + q + "' " +
+            "onclick='nextpage()' >Next Page</button>" +
+            "</div>";
+    } else {
+        btnOutput = "<div class='button-container'>" +
+            "< button id= 'prev-button' class='paging-button' data- token='" + prevPageToken + "' data-query='" + q + "' " +
+            "onclick='prevpage()' >Previous Page</button>" +
+            "<button id='next-button' class='paging-button' data-token='" + nextPageToken + "' data-query='" + q + "' " +
+            "onclick='nextpage()' >Next Page</button>" +
+            "</div>";
+    }
+
+    return btnOutput;
 }
